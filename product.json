@@ -1,0 +1,35 @@
+[
+        {
+            "name":"Mens T-Shirt",
+            "price":1999,
+            "rating":4.3,
+            "freedelivery":true,
+            "company":"Adidas",
+            "image":"https://the-collective.imgix.net/img/app/product/6/687123-7293639.jpg?w=1600&auto=format"
+        },
+        {
+            "name":"Mens Shirt",
+            "price":4999,
+            "rating":3.9,
+            "freedelivery":true,
+            "company":"H&M"
+            
+        },
+        {
+            "name":"Mens Sports T-Shirt",
+            "price":999,
+            "rating":4.3,
+            "freedelivery":true,
+            "company":"Nike",
+            "image":"https://static.nike.com/a/images/t_PDP_1280_v1/f_auto,q_auto:eco/jnighv6j24navz8l7xa5/sportswear-t-shirt-ff1fRb.png"
+        },
+        {
+            "name":"Mens Polo Shirt",
+            "price":1499,
+            "rating":4.9,
+            "freedelivery":true,
+            "company":"Polo",
+            "image":"https://qikink.com/wp-content/uploads/2018/03/Polo-T-Shirt-Dropshipping-Qikink.jpg"
+        }
+    
+    ]
