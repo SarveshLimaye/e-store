@@ -2,8 +2,8 @@ const Product = require('../models/product')
 const jsonProduct = require('../product.json')
 
 const getAllStaticProducts = async (req, res) => {
-   // res.status(200).send(jsonProduct)
-   await Product.create(jsonProduct)
+   res.status(200).send(jsonProduct)
+   // await Product.create(jsonProduct)
 }
 
 const searchProducts = async (req,res) => {
@@ -15,7 +15,7 @@ const searchProducts = async (req,res) => {
 
 
 const getAllProducts = async (req, res) => {
-   res.status(200).json({ msg:'products route' })
+   res.status(200).json(await Product.find())
 }
 
 module.exports = {getAllProducts, getAllStaticProducts ,searchProducts}

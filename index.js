@@ -6,6 +6,7 @@ const app = express()
 
 const notFoundMiddleware = require('./middleware/not-found')
 const productroute = require('./routes/products')
+const userroute = require('./routes/user')
 const errorHandlerMiddleware = require('./middleware/error-handler')
 
 const connectDB = require('./db/connect')
@@ -18,7 +19,9 @@ app.get('/', (req, res) => {
 })
 
 //middleware
+app.use(express.json())
 app.use('/api/v1/products' , productroute)
+app.use('/api/users', userroute)
 app.use(notFoundMiddleware)
 app.use(errorHandlerMiddleware)
 
