@@ -1,6 +1,7 @@
 require('dotenv').config();
 require('express-async-errors');
 const express = require('express')
+const cors = require('cors');
 
 const app = express()
 
@@ -20,6 +21,7 @@ app.get('/', (req, res) => {
 
 //middleware
 app.use(express.json())
+app.use(cors())
 app.use('/api/v1/products' , productroute)
 app.use('/api/users', userroute)
 app.use(notFoundMiddleware)
