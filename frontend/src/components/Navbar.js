@@ -14,7 +14,8 @@ import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import {Link} from "react-router-dom";
 
-const pages = ['Products','Cart','Login','Register'];
+const auth = localStorage.getItem('user');
+const pages = ['Products',auth ? 'Profile':'Login',auth ? 'Logout' : 'Register',auth ? 'Cart' : null];
 
 
 const Navbar = () => {

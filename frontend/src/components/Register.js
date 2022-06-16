@@ -1,5 +1,5 @@
 import { Grid, TextField ,Button, Typography} from "@mui/material";
-import { useState , React } from "react";
+import { useState , React ,useEffect} from "react";
 import { useNavigate } from "react-router-dom";
 
 
@@ -9,6 +9,12 @@ const Register = () => {
  const [email, setEmail] = useState("");
  const [password, setPassword] = useState("");
  const navigate = useNavigate();
+ useEffect(() => {
+  const auth = localStorage.getItem('user');
+    if (auth) {
+        navigate('/');
+    }
+ },[])
  const collectData = async () => {
     let result = await fetch("http://localhost:5000/api/users/register", {
         method: 'post',
@@ -20,6 +26,7 @@ const Register = () => {
     })
     result = await result.json();
     console.log(result);
+    localStorage.setItem("user",JSON.stringify(result));
     navigate("/");
  }
   return (

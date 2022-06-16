@@ -1,10 +1,11 @@
 import Navbar from "./components/Navbar";
-import {Route, Routes } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import Products from "./components/Products";
 import Cart from "./components/Cart";
 import Profile from "./components/Profile";
-import Logout from "./components/Login";
+import Login from "./components/Login";
 import Register from "./components/Register";
+import Logout from "./components/Logout";
 
 function App() {
   return (
@@ -15,8 +16,9 @@ function App() {
       <Route path="/Products" element={<Products />} />
       <Route path="/Cart" element={<Cart />} />
       <Route path="/Profile" element={<Profile />}></Route>
-      <Route path="/Login" element={<Logout />}></Route>
+      <Route path="/Login" element={<Login />}></Route>
       <Route path="/Register" element={<Register />}></Route>
+      <Route path="/Logout" element={<Logout />}></Route>
      </Routes>
     </div>
   );
