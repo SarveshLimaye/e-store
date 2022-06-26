@@ -13,15 +13,14 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import {Link} from "react-router-dom";
-
-const auth = localStorage.getItem('user');
-const pages = ['Products',auth ? 'Profile':'Login',auth ? 'Logout' : 'Register',auth ? 'Cart' : null];
+import { useAuth0 } from "@auth0/auth0-react";
 
 
 const Navbar = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
+  const [anchorElUser, setAnchorElUser] = React.useState(null);
+  const { loginWithRedirect , user , isAuthenticated , logout} = useAuth0()
   
-
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
@@ -31,7 +30,16 @@ const Navbar = () => {
     setAnchorElNav(null);
   };
 
- 
+  const loginhandle = () =>{
+    setAnchorElNav(null);
+    loginWithRedirect()
+  }
+
+  const handleOpenUserMenu = (event) => {
+    setAnchorElUser(event.currentTarget);
+  };
+
+
 
   return (
     <AppBar position="static">
@@ -85,13 +93,16 @@ const Navbar = () => {
                 display: { xs: 'block', md: 'none' },
               }}
             >
-            {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
+            <MenuItem  onClick={handleCloseNavMenu}>
                   <Typography textAlign="center">
-                  <Link to={`/${page}`}>{page}</Link>
+                  <Button><Link to={`/Products`}>Products</Link></Button>
                   </Typography>
                 </MenuItem>
-              ))}
+                <MenuItem  onClick={handleCloseNavMenu}>
+                  <Typography textAlign="center">
+                  {isAuthenticated ? <Button>Logout </Button>: <Button>Login</Button> }
+                  </Typography>
+                </MenuItem>
             </Menu>
           </Box>
           <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
@@ -114,16 +125,36 @@ const Navbar = () => {
             LOGO
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-            {pages.map((page) => (
-              <Button
-                key={page}
+          <Button
                 onClick={handleCloseNavMenu}
                 sx={{ my: 2, color: 'white', display: 'block' }}
               >
-                 <Link style={{textDecoration:"none",color:"white"}} to={`${page}`}>{page}</Link>
+                 <Link style={{textDecoration:"none",color:"white"}} to={`\Products`}>Products</Link>
               </Button>
-            ))}
+              {isAuthenticated ? <Button
+                onClick={() => logout({ returnTo: window.location.origin })}
+                sx={{ my: 2, color: 'white', display: 'block' }}
+              >
+                Logout
+              </Button>:<Button
+                onClick={loginhandle}
+                sx={{ my: 2, color: 'white', display: 'block' }}
+              >
+                Login
+              </Button>}
+              {isAuthenticated ? <Button
+                sx={{ my: 2, color: 'white', display: 'block' }}
+              >
+              <Link  style={{textDecoration:"none",color:"white"}} to={`\Cart`}>Cart</Link>  
+              </Button>: null}
+            
           </Box>
+          {isAuthenticated ? <Tooltip title="Open settings">
+              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                <Avatar alt="Remy Sharp" src={user.picture}/>
+              </IconButton>
+            </Tooltip> : null}
+          
         </Toolbar>
       </Container>
     </AppBar>
