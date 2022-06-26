@@ -39,7 +39,26 @@ const Navbar = () => {
     setAnchorElUser(event.currentTarget);
   };
 
+  const collectData = async () => {
+    let name = user.name;
+    let email = user.email;
+    let image = user.picture;
+    let result = await fetch("http://localhost:5000/api/users/addUser", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        name,
+        email,
+        image,
+      }),
+    });
 
+    result = await result.json();
+  };
+
+  collectData();
 
   return (
     <AppBar position="static">

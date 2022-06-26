@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-const bcrypt = require('bcrypt')
 
 const userSchema = new mongoose.Schema({
     name: {
@@ -11,12 +10,6 @@ const userSchema = new mongoose.Schema({
         required: [true, 'user email must be provided'],
         unique: true,
         lowercase: true,        
-    },
-    password: {
-        type: String,
-        required: [true, 'user password must be provided'],
-        minlength: [8, 'user password must be at least 8 characters'],
-        maxlength: [16, 'user password must be at most 16 characters'],
     },
     isSeller:{
         type: Boolean,
@@ -30,16 +23,6 @@ const userSchema = new mongoose.Schema({
     }
     ,{timestamps: true})
 
-    //encrypt password
-    userSchema.pre('save',async function(next)  {
-         if(!this.isModified('password')) next();
-         const salt = await bcrypt.genSalt(10);
-         this.password = await bcrypt.hash(this.password, salt);
-    })
-
-    //decrypt password
-    userSchema.methods.isValidPassword = async function(password) {
-        return await bcrypt.compare(password, this.password);
-    }
+   
 
     module.exports = mongoose.model('User', userSchema)
