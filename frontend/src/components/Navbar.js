@@ -112,11 +112,6 @@ const Navbar = () => {
                 display: { xs: 'block', md: 'none' },
               }}
             >
-            <MenuItem  onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">
-                  <Button><Link to={`/Products`}>Products</Link></Button>
-                  </Typography>
-                </MenuItem>
                 <MenuItem  onClick={handleCloseNavMenu}>
                   <Typography textAlign="center">
                   {isAuthenticated ? <Button>Logout </Button>: <Button>Login</Button> }
@@ -144,12 +139,6 @@ const Navbar = () => {
             LOGO
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-          <Button
-                onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: 'white', display: 'block' }}
-              >
-                 <Link style={{textDecoration:"none",color:"white"}} to={`\Products`}>Products</Link>
-              </Button>
               {isAuthenticated ? <Button
                 onClick={() => logout({ returnTo: window.location.origin })}
                 sx={{ my: 2, color: 'white', display: 'block' }}

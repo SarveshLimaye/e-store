@@ -22,7 +22,8 @@ const Products = () => {
           description={product.description} 
           rating={product.rating} 
           image={product.image}
-          id={product._id}  
+          id={product._id}
+          price={product.price}  
           />
         </Grid>
       ))}

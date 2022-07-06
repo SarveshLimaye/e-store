@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const Product = require('../models/product')
 
 const userSchema = new mongoose.Schema({
     name: {
@@ -20,6 +21,11 @@ const userSchema = new mongoose.Schema({
         type: String,       
         default: 'https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200',
     },
+    cart:[{
+        type: mongoose.Schema.Types.ObjectId,
+        ref:'Product',
+        default: [],
+    }]
     }
     ,{timestamps: true})
 

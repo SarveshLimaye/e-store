@@ -12,10 +12,15 @@ const searchProducts = async (req,res) => {
    res.status(200).send(searchData)
 }
 
+const getProductbyId = async (req,res) => {
+   let product = await Product.findOne({_id:req.params.id})
+   res.status(200).send(product)
+}
+
 
 
 const getAllProducts = async (req, res) => {
    res.status(200).json(await Product.find())
 }
 
-module.exports = {getAllProducts, getAllStaticProducts ,searchProducts}
+module.exports = {getAllProducts, getAllStaticProducts ,searchProducts ,getProductbyId}
