@@ -2,9 +2,11 @@ import { useState , useEffect} from 'react';
 import { Typography } from '@mui/material';
 import * as React from 'react';
 import { getInitColorSchemeScript, styled } from '@mui/material/styles';
+import DeleteIcon from '@mui/icons-material/Delete';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
 import ButtonBase from '@mui/material/ButtonBase';
+import Button from '@mui/material/Button';
 import { QuantityPicker } from 'react-qty-picker';
 import { Box } from '@mui/system';
 
@@ -15,12 +17,22 @@ const Img = styled('img')({
     maxHeight: '100%',
   });
 
-const CartCard = ({image,price,id,name,company}) => {
+const CartCard = ({image,price,id,name,company,email,cart}) => {
      const [quantity,setQuantity] = useState(1)
      const getQuantity = (value) => {
             setQuantity(value)
      }
-   
+
+     const deleteItem = async () => {
+       let item = await fetch (`http://localhost:5000/api/users/cart/${email}/delete/${id}`,{
+        method:"Delete",
+        headers:{
+            "Content-Type":"application/json"
+        },
+       })
+     }
+
+
      
         return(
           <Paper
@@ -48,21 +60,22 @@ const CartCard = ({image,price,id,name,company}) => {
                   <Typography variant="body2" gutterBottom>
                     {company}
                   </Typography>
+                    </Grid>
                   <Grid item> 
-  
-                  </Grid>
-                <Box>
+                 
                 <Typography variant="body2" color="text.secondary">
-                   Qty : <QuantityPicker smooth min={1} value={1} onChange = {getQuantity}/>
+                   Qty : <QuantityPicker smooth min={1} value={1} onChange = {getQuantity}/>  
                   </Typography>
-                </Box>
+                 
                 </Grid>
               </Grid>
               <Grid item>
                 <Typography variant="subtitle1" component="div">
-                    {price}
+                    Rs {price * quantity}
                 </Typography>
+                <Button style={{marginTop:'4rem'}} onClick={() => { deleteItem() }}><DeleteIcon /></Button>
               </Grid>
+          
             </Grid>
           </Grid>
         </Paper>
