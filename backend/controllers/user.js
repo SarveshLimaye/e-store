@@ -7,6 +7,11 @@ const getAllUsers = async (req,res) => {
    
 }
 
+const deleteCart = async (req,res) => {
+  await User.findOneAndUpdate({email:req.params.email},{$pull:{cart:req.params.id}},{new:true})
+  res.status(200).json({message:'item deleted from cart'})
+}
+
 const getCart = async (req,res) => {
   await User.findOne({email:req.params.email},
     (err,cart) => {
@@ -85,4 +90,4 @@ const addUser = asyncHandler(async (req,res) => {
 })
 
 
-module.exports = {getAllUsers , addUser , updateCart , getUserbyId ,getCart}
+module.exports = {getAllUsers , addUser , updateCart , getUserbyId ,getCart,deleteCart}
