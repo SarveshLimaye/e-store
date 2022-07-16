@@ -3,6 +3,7 @@ import { Route, Routes } from "react-router-dom";
 import Products from "./components/Products";
 import Cart from "./components/Cart";
 import Profile from "./components/Profile";
+import ShippingForm from "./components/ShippingForm";
 function App() {
   return (
     <div className="App">

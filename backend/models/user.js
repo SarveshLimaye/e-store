@@ -25,7 +25,11 @@ const userSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref:'Product',
         default: [],
-    }]
+    }],
+    shippingDetails:{
+        type: Object,
+        default: null,
+    }
     }
     ,{timestamps: true})
 

@@ -1,14 +1,14 @@
 import { useState , useEffect} from 'react';
 import { Typography } from '@mui/material';
 import * as React from 'react';
-import { getInitColorSchemeScript, styled } from '@mui/material/styles';
+import { styled } from '@mui/material/styles';
 import DeleteIcon from '@mui/icons-material/Delete';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
 import ButtonBase from '@mui/material/ButtonBase';
 import Button from '@mui/material/Button';
 import { QuantityPicker } from 'react-qty-picker';
-import { Box } from '@mui/system';
+import {Link} from "react-router-dom";
 
 const Img = styled('img')({
     margin: 'auto',
@@ -32,6 +32,23 @@ const CartCard = ({image,price,id,name,company,email,cart}) => {
        })
      }
 
+     const buyNow = async () => {
+       let product = await fetch(`http://localhost:5000/api/orders/add`,{
+        method:"Post",
+        headers:{
+          "Content-Type":"application/json"
+      },
+       body:JSON.stringify({
+         orders:id,
+         email,
+         price
+       })
+
+       })
+
+       console.log(await product.json())
+     }
+
 
      
         return(
@@ -47,7 +64,7 @@ const CartCard = ({image,price,id,name,company,email,cart}) => {
         >
           <Grid container spacing={2}>
             <Grid item>
-              <ButtonBase sx={{ width: 128, height: 128 }}>
+              <ButtonBase sx={{ width: '8rem', height: '8rem' }}>
                 <Img alt="complex" src={image} />
               </ButtonBase>
             </Grid>
@@ -70,10 +87,13 @@ const CartCard = ({image,price,id,name,company,email,cart}) => {
                 </Grid>
               </Grid>
               <Grid item>
-                <Typography variant="subtitle1" component="div">
+                <Typography variant="subtitle1" component="div" style={{marginLeft:'3rem'}}>
                     Rs {price * quantity}
                 </Typography>
-                <Button style={{marginTop:'4rem'}} onClick={() => { deleteItem() }}><DeleteIcon /></Button>
+              <Grid>
+              <Button style={{marginTop:'4rem'}} onClick={() => { deleteItem() }}><DeleteIcon /></Button>
+              <Link to={"/Orders"}  style={{textDecoration:"none"}}><Button style={{marginTop:'4rem'}} onClick={() => { buyNow()}}>Buy Now</Button></Link>
+              </Grid>  
               </Grid>
           
             </Grid>

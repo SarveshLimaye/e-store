@@ -24,6 +24,28 @@ const getCart = async (req,res) => {
     })
 }
 
+const shippingDetails = async (req,res) => {
+    const {email,address,contact,city,state,country,zip,paymentDetails} = req.body
+    const user = await User.findOne({email})
+    if(user){
+        await User.findOneAndUpdate({email},{
+          shippingDetails:{
+            address,
+            contact,
+            city,
+            state,
+            country,
+            zip,
+            paymentDetails
+          }
+        },{new:true})
+        res.status(200).json({message:'shipping details updated'})
+    }
+    else{
+        res.status(404).json({message:'user not found'})
+    }
+}
+
 const updateCart = async (req,res) => {
      
      const {email,cart} = req.body
@@ -90,4 +112,4 @@ const addUser = asyncHandler(async (req,res) => {
 })
 
 
-module.exports = {getAllUsers , addUser , updateCart , getUserbyId ,getCart,deleteCart}
+module.exports = {getAllUsers , addUser , updateCart , getUserbyId ,getCart,deleteCart,shippingDetails,checkCart}

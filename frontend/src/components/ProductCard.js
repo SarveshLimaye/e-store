@@ -21,25 +21,30 @@ const ProductCard = ({title,desc,image ,rating,id ,price}) => {
   const[success,setSuccess] = useState(false)
   const[open,setOpen]=useState(false)
     const addToCart = async (_id) => {
-       const cartid = _id
-       const email = user.email
-      setOpen(true)
-       let cart = await fetch(`http://localhost:5000/api/users/updateCart`,{
-            method:"Put",
-            headers:{
-                "Content-Type":"application/json"
-            },
-            body:JSON.stringify({
-              cart:cartid,
-              email
-            })
-       })
-
-      let result = await cart.json()
-      console.log(result)
-      if(!result.message){
-        setSuccess(true)
+      if(isAuthenticated){
+        const cartid = _id
+        const email = user.email
+       setOpen(true)
+        let cart = await fetch(`http://localhost:5000/api/users/updateCart`,{
+             method:"Put",
+             headers:{
+                 "Content-Type":"application/json"
+             },
+             body:JSON.stringify({
+               cart:cartid,
+               email
+             })
+        })
+ 
+       let result = await cart.json()
+       console.log(result)
+       if(!result.message){
+         setSuccess(true)
+       }
+      } else{
+        alert("Please login to add to cart")
       }
+      
     }
 
     const handleClose = (event, reason) => {
@@ -48,6 +53,15 @@ const ProductCard = ({title,desc,image ,rating,id ,price}) => {
       }
       setOpen(false);
     }
+
+    const loginAlert = () => (
+        <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+         <Alert onClose={handleClose} severity="error" sx={{ width: '100%' }}>
+          Login to add to cart !
+        </Alert>
+      </Snackbar>
+      )
+
 
     return (
         <Card sx={{ maxWidth: 345 , height:400}} style={{margin:"1rem  1rem "}}>
@@ -77,7 +91,7 @@ const ProductCard = ({title,desc,image ,rating,id ,price}) => {
           </CardContent>
           <CardActions>
            <Typography gutterBottom variant="h6" component="div" style={{margin:'0 0 0 0.9rem',color:'#1976d2'}}>Rs {price}</Typography>
-            <Button size="small" onClick={() => {addToCart(id)}}><AddShoppingCartIcon /></Button>
+            <Button size="small" onClick={() => { addToCart(id)}}><AddShoppingCartIcon /></Button>
           </CardActions>
         </Card>
       );
