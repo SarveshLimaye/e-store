@@ -14,6 +14,8 @@ root.render(
   domain={domain}
   clientId={clientid}
   redirectUri={window.location.origin}
+  useRefreshTokens={true}
+  cacheLocation="localstorage"
 >
   <BrowserRouter>
   <React.StrictMode>

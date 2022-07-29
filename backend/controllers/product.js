@@ -8,7 +8,7 @@ const getAllStaticProducts = async (req, res) => {
 
 const searchProducts = async (req,res) => {
 
-   let searchData = await Product.find({"$or":[{name:req.query.name},{company:req.query.company}]})
+   let searchData = await Product.find({"$or":[{name:{"$regex":req.query.name,"$options":"i"}},{company:req.query.company}]})
    res.status(200).send(searchData)
 }
 

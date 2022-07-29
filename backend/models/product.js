@@ -29,6 +29,10 @@ const productSchema = new mongoose.Schema({
     type: String,
     required: [true, 'company name must be provided']
   },
+  quantity:{
+    type: Number,
+    default: 1,
+  }
 })
 
 module.exports = mongoose.model('Product', productSchema)

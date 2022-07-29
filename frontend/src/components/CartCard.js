@@ -17,7 +17,7 @@ const Img = styled('img')({
     maxHeight: '100%',
   });
 
-const CartCard = ({image,price,id,name,company,email,cart}) => {
+const CartCard = ({image,price,id,name,company,email,cart , isOrder}) => {
      const [quantity,setQuantity] = useState(1)
      const getQuantity = (value) => {
             setQuantity(value)
@@ -31,26 +31,6 @@ const CartCard = ({image,price,id,name,company,email,cart}) => {
         },
        })
      }
-
-     const buyNow = async () => {
-       let product = await fetch(`http://localhost:5000/api/orders/add`,{
-        method:"Post",
-        headers:{
-          "Content-Type":"application/json"
-      },
-       body:JSON.stringify({
-         orders:id,
-         email,
-         price
-       })
-
-       })
-
-       console.log(await product.json())
-     }
-
-
-     
         return(
           <Paper
           sx={{
@@ -91,8 +71,7 @@ const CartCard = ({image,price,id,name,company,email,cart}) => {
                     Rs {price * quantity}
                 </Typography>
               <Grid>
-              <Button style={{marginTop:'4rem'}} onClick={() => { deleteItem() }}><DeleteIcon /></Button>
-              <Link to={"/Orders"}  style={{textDecoration:"none"}}><Button style={{marginTop:'4rem'}} onClick={() => { buyNow()}}>Buy Now</Button></Link>
+             {isOrder ? null : <div> <Button style={{marginTop:'4rem' , marginLeft:'3rem'}} onClick={() => { deleteItem() }}><DeleteIcon /></Button></div>}
               </Grid>  
               </Grid>
           
