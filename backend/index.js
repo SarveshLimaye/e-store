@@ -21,8 +21,10 @@ app.get('/', (req, res) => {
 })
 
 //middleware
-app.use(express.json())
+
+
 app.use(cors())
+app.use(express.json())
 app.use('/api/v1/products' , productroute)
 app.use('/api/users', userroute)
 app.use('/api/stripe', striperoute)

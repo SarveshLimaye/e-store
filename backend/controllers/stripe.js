@@ -2,6 +2,13 @@
 const stripe = require('stripe')(process.env.STRIPE_KEY);
 
 const payment = async (req,res) => {
+  // console.log(req.body.userId)
+  const customer = await stripe.customers.create({
+    metadata:{
+       userId: req.body.userId,
+       cart:JSON.stringify(req.body.cart)
+    }
+  })
     const line_items = req.body.cart.map((item) => {
         return {
           price_data: {
@@ -11,7 +18,10 @@ const payment = async (req,res) => {
               images:[item.image],
               description: item.company,
               metadata:{
-                id: item._id
+                name: item.name,
+                price:item.price,
+                image:item.image
+
               }
 
             },
@@ -70,10 +80,11 @@ const payment = async (req,res) => {
         }
       },
     ],
+      customer: customer.id,
       line_items,
       mode: 'payment',
       success_url: 'http://localhost:3000/Success',
-      cancel_url: 'http://localhost:3000/Cart',
+      cancel_url: 'http://localhost:3000/',
     });
   
     res.send({url: session.url});
@@ -83,3 +94,4 @@ const payment = async (req,res) => {
 }
 
 module.exports= {payment}
+
