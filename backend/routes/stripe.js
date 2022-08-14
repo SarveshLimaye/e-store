@@ -2,26 +2,10 @@ const express = require('express')
 const router = express.Router()
 const stripe = require('stripe')(process.env.STRIPE_KEY);
 
-const {payment} = require('../controllers/stripe')
+const {payment , createOrder} = require('../controllers/stripe')
 
 router.post('/create-checkout-session',payment)
 
-
-// server.js
-//
-// Use this sample code to handle webhook events in your integration.
-//
-// 1) Paste this code into a new file (server.js)
-//
-// 2) Install dependencies
-//   npm install stripe
-//   npm install express
-//
-// 3) Run the server on http://localhost:4242
-//   node server.js
-
-
-// This is your Stripe CLI webhook secret for testing your endpoint locally.
 const endpointSecret = "whsec_39cc0aac9fde1d7da9b626cdd3c864661664f510d4938f27dcceb55c949325f4";
 
 router.post('/webhook', express.raw({type: 'application/json'}), (request, response) => {
@@ -42,9 +26,7 @@ router.post('/webhook', express.raw({type: 'application/json'}), (request, respo
 
   try {
     event = stripe.webhooks.constructEvent(payloadString, header, endpointSecret);
-    console.log("Webhook verified")
   } catch (err) {
-    console.log(err)
     response.status(400).send(`Webhook Error: ${err.message}`);
     return;
   } 
@@ -62,17 +44,11 @@ router.post('/webhook', express.raw({type: 'application/json'}), (request, respo
   if(eventType === 'checkout.session.completed'){
     stripe.customers.retrieve(data.customer)
       .then((customer) =>  {
-        console.log(customer)
-        // console.log("data",data)
+        createOrder(customer,data)
       }).catch((err) => {
         console.log(err)
-      })
-
- 
-    
-    
+      })  
   }
-  
 
   // Return a 200 response to acknowledge receipt of the event
   response.send();

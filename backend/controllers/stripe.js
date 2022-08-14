@@ -1,12 +1,15 @@
+const order = require('../models/order');
+
  require('dotenv').config();
 const stripe = require('stripe')(process.env.STRIPE_KEY);
+
 
 const payment = async (req,res) => {
   // console.log(req.body.userId)
   const customer = await stripe.customers.create({
     metadata:{
        userId: req.body.userId,
-       cart:JSON.stringify(req.body.cart)
+       product: JSON.stringify(req.body.productId)
     }
   })
     const line_items = req.body.cart.map((item) => {
@@ -17,12 +20,7 @@ const payment = async (req,res) => {
               name: item.name,
               images:[item.image],
               description: item.company,
-              metadata:{
-                name: item.name,
-                price:item.price,
-                image:item.image
-
-              }
+              metadata:{}
 
             },
             unit_amount: item.price * 100,
@@ -93,5 +91,26 @@ const payment = async (req,res) => {
    
 }
 
-module.exports= {payment}
+const createOrder = async (customer,data) => {
+  const Items = JSON.parse(customer.metadata.product)
+
+  const newOrder = await order.create({
+     userId:customer.metadata.userId,
+     email:customer.email,
+     product:Items,
+     subTotal:data.amout_subtotal,
+     total:data.amount_total,
+     shipping:data.customer_details.address,
+     payment_status:data.payment_status 
+  })
+
+  if(newOrder){
+   console.log("Order received")
+  }else{
+    throw new Error('Order not created')
+  }
+
+}
+
+module.exports= {payment , createOrder}
 

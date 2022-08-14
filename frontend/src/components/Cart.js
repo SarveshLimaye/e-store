@@ -6,9 +6,12 @@ import { Button , Grid} from "@mui/material";
 const Cart = () => {
    const [cart,setCart] = useState()
    const [id,setId] = useState('')
+   let productId = []
    const[url,setUrl] = useState('')
    const {user} = useAuth0();
    const email = user.email;
+  
+  
 
    const stripe = async () => {
     let response = await fetch("http://localhost:5000/api/stripe/create-checkout-session", {
@@ -19,6 +22,7 @@ const Cart = () => {
       body: JSON.stringify({
         cart,
         userId:id,
+        productId:productId,
       })
 
   })
@@ -34,13 +38,21 @@ const Cart = () => {
           setId(data._id)
           setCart(data.cart)
           
-      }
+      }  
       fetchApi()
       stripe()
+      
    },[cart])
 
-  
+   const getProductId = async () => {
+      cart?.map((item) => {
+        productId.push(item._id)
+      })
 
+    
+   }
+   getProductId()
+  
    
    return(
       <div>
