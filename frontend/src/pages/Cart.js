@@ -1,4 +1,4 @@
-import CartCard from "./CartCard";
+import CartCard from "../components/CartCard";
 import { useEffect, useState } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 import { Button , Grid} from "@mui/material";

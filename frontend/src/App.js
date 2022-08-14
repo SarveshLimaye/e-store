@@ -1,9 +1,9 @@
 import Navbar from "./components/Navbar";
 import { Route, Routes } from "react-router-dom";
-import Products from "./components/Products";
-import Cart from "./components/Cart";
-import Profile from "./components/Profile";
-import Success from "./components/Success";
+import Products from "./pages/Products";
+import Cart from "./pages/Cart";
+import Profile from "./pages/Profile";
+import Success from "./pages/Success";
 
 function App() {
   return (

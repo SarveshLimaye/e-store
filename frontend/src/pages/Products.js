@@ -1,7 +1,7 @@
 import { useEffect , useState} from "react";
-import ProductCard from "./ProductCard";
+import ProductCard from "../components/ProductCard";
 import { Grid } from "@mui/material";
-import Search from "./Search";
+import Search from "../components/Search";
 
 const Products = () => {
     const[products,setProducts]=useState([])
