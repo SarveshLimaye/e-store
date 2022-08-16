@@ -1,7 +1,11 @@
-require('dotenv').config();
+if (process.env.NODE_ENV !== 'production') {
+  require('dotenv').config({path: __dirname+'/.env'});
+}
+
 require('express-async-errors');
 const express = require('express')
 const cors = require('cors');
+const path = require('path');
 
 const app = express()
 
@@ -16,7 +20,7 @@ const connectDB = require('./db/connect')
 
 
 
-app.get('/', (req, res) => {
+app.get('/api', (req, res) => {
   res.send('<h1>Hello World</h1>')
 })
 
@@ -42,6 +46,12 @@ const start = async () => {
     } catch(err) {
         console.log(err)
     }
+}
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static(path.join(__dirname, '../frontend', 'build')));
+  app.get('/*', (req, res) => {
+    res.sendFile(path.join(__dirname, '../frontend', 'build', 'index.html'));
+  })
 }
 
 start()

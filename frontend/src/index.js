@@ -17,7 +17,7 @@ root.render(
   useRefreshTokens={true}
   cacheLocation="localstorage"
 >
-  <BrowserRouter>
+  <BrowserRouter basename='/'>
   <React.StrictMode>
     <App />
   </React.StrictMode>
