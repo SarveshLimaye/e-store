@@ -1,7 +1,4 @@
-if (process.env.NODE_ENV !== 'production') {
-  require('dotenv').config({path: __dirname+'/.env'});
-}
-
+require('dotenv').config();
 require('express-async-errors');
 const express = require('express')
 const cors = require('cors');
