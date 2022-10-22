@@ -14,6 +14,7 @@ import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import {Link} from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 
 
 const Navbar = () => {
@@ -61,10 +62,10 @@ const Navbar = () => {
   collectData();
 
   return (
-    <AppBar position="static">
+    <AppBar position="static"  style={{ background: '#372948' }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
+          <ShoppingCartIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
           <Typography
             variant="h6"
             noWrap
@@ -80,10 +81,10 @@ const Navbar = () => {
               textDecoration: 'none',
             }}
           >
-            LOGO
+            E-commerce
           </Typography>
 
-          <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
+          <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }} style={{marginLeft:'rem'}}>
             <IconButton
               size="large"
               aria-label="account of current user"

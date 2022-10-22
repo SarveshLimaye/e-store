@@ -7,8 +7,7 @@ import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
 import ButtonBase from '@mui/material/ButtonBase';
 import Button from '@mui/material/Button';
-import { QuantityPicker } from 'react-qty-picker';
-import {Link} from "react-router-dom";
+import Rating from '@mui/material/Rating';
 
 const Img = styled('img')({
     margin: 'auto',
@@ -22,6 +21,7 @@ const CartCard = ({image,price,id,name,company,email,cart , isOrder}) => {
      const getQuantity = (value) => {
             setQuantity(value)
      }
+     
 
      const deleteItem = async () => {
        let item = await fetch (`http://localhost:5000/api/users/cart/${email}/delete/${id}`,{
@@ -60,9 +60,7 @@ const CartCard = ({image,price,id,name,company,email,cart , isOrder}) => {
                     </Grid>
                   <Grid item> 
                  
-                <Typography variant="body2" color="text.secondary">
-                   Qty : <QuantityPicker smooth min={1} value={1} onChange = {getQuantity}/>  
-                  </Typography>
+                
                  
                 </Grid>
               </Grid>

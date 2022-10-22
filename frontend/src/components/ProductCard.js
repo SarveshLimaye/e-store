@@ -90,8 +90,8 @@ const ProductCard = ({title,desc,image ,rating,id ,price}) => {
       </Snackbar>}
           </CardContent>
           <CardActions>
-           <Typography gutterBottom variant="h6" component="div" style={{margin:'0 0 0 0.9rem',color:'#1976d2'}}>Rs {price}</Typography>
-            <Button size="small" onClick={() => { addToCart(id)}}><AddShoppingCartIcon /></Button>
+           <Typography gutterBottom variant="h6" component="div" style={{margin:'0 0 0 0.9rem',color:'#3F0071'}}>Rs {price}</Typography>
+            <Button size="small" onClick={() => { addToCart(id)}} style={{color:'#3F0071'}}><AddShoppingCartIcon /></Button>
           </CardActions>
         </Card>
       );
