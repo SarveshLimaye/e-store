@@ -156,6 +156,12 @@ const Navbar = () => {
               >
               <Link  style={{textDecoration:"none",color:"white"}} to={`\Cart`}>Cart</Link>  
               </Button>: null}
+
+              {isAuthenticated ? <Button
+                sx={{ my: 2, color: 'white', display: 'block' }}
+              >
+              <Link  style={{textDecoration:"none",color:"white"}} to={`\Orders`}>Orders</Link>  
+              </Button>: null}
             
           </Box>
           {isAuthenticated ? <Tooltip title="Open settings">
