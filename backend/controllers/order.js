@@ -7,18 +7,13 @@ const getAllOrders = async (req,res) => {
 }
 
 const getOrderbyId = async (req,res) => {
-    const order = await Order.findOne({userId:req.params.id},
-     (err,product) => {
-         if(err){
-            console.log(err)
-         }
-         product.populate("product").execPopulate(() => {
-            console.log(product)
-            res.status(200).json(product)
-         })
-     }        
-        
-)
+    const order = await Order.find({userId:req.params.id})
+    .populate('product').exec((err,product) => {
+        if(err){
+            res.status(400).json({message:err})
+        }
+        res.status(200).json(product)
+    })
 }
 
 module.exports = {
