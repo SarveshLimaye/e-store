@@ -11,12 +11,15 @@ import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import { useAuth0 } from "@auth0/auth0-react";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
 
 const ProductCard = ({title,desc,image ,rating,id ,price}) => {
+  const notify = () => toast.error("Login to add to cart");
   const {user , isAuthenticated} = useAuth0()
   const[success,setSuccess] = useState(false)
   const[open,setOpen]=useState(false)
@@ -41,11 +44,11 @@ const ProductCard = ({title,desc,image ,rating,id ,price}) => {
        if(!result.message){
          setSuccess(true)
        }
-      } else{
-        alert("Please login to add to cart")
-      }
+      } 
       
     }
+
+
 
     const handleClose = (event, reason) => {
       if (reason === 'clickaway') {
@@ -54,13 +57,9 @@ const ProductCard = ({title,desc,image ,rating,id ,price}) => {
       setOpen(false);
     }
 
-    const loginAlert = () => (
-        <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
-         <Alert onClose={handleClose} severity="error" sx={{ width: '100%' }}>
-          Login to add to cart !
-        </Alert>
-      </Snackbar>
-      )
+   
+     
+    
 
 
     return (
@@ -91,8 +90,20 @@ const ProductCard = ({title,desc,image ,rating,id ,price}) => {
           </CardContent>
           <CardActions>
            <Typography gutterBottom variant="h6" component="div" style={{margin:'0 0 0 0.9rem',color:'#3F0071'}}>Rs {price}</Typography>
-            <Button size="small" onClick={() => { addToCart(id)}} style={{color:'#3F0071'}}><AddShoppingCartIcon /></Button>
+            <Button size="small" onClick={() => { isAuthenticated ? addToCart(id) : notify() }} style={{color:'#3F0071'}}><AddShoppingCartIcon /></Button>
           </CardActions>
+          <ToastContainer
+      position="top-right"
+      autoClose={5000}
+      hideProgressBar={false}
+      newestOnTop={false}
+      closeOnClick
+      rtl={false}
+      pauseOnFocusLoss
+      draggable
+      pauseOnHover
+      theme="dark"
+      />
         </Card>
       );
 
