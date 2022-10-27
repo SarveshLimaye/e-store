@@ -1,7 +1,6 @@
 import React from 'react'
 import { Card, Grid } from '@mui/material';
 import { styled } from '@mui/material/styles';
-import CardActions from '@mui/material/CardActions';
 import { Box} from '@mui/system';
 import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
@@ -14,7 +13,7 @@ const Img = styled('img')({
 
 export default function OrderCard({id,product,price,email,payment_status,shipping}) {
     return (
-    <Card sx={{ maxWidth: 345 , height:400}} style={{margin:"1rem  1rem "}}>
+    <Card  style={{margin:"1rem  1rem "}}>
     <Box sx={{textAlign:'center'}} mt={2}>
     <Typography variant='h7' fontWeight={'bold'}>
       Order : {id}
