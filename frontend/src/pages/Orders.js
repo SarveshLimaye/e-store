@@ -14,23 +14,29 @@ const Orders = () => {
         const fetchApi = async () => {
             const response = await fetch(`http://localhost:5000/api/users`);
             const data = await response.json();
-           data.map((item) => {
+           data.map( (item) => {
               
                 if(item.email === email){
                      setuserId(item._id)
+                    
                 }
               })
     }
 
     const fetchOrders = async () => {
-        const response = await fetch(`http://localhost:5000/api/orders/${userId}`);
-        const data = await response.json();
-        setOrders(data)
+        if(userId !== ''){
+            const response = await fetch(`http://localhost:5000/api/orders/${userId}`);
+            console.log(response)
+            const data = await response.json();
+            setOrders(data)
+        }
+        
+       
     }
     fetchApi()
     fetchOrders()
     
-},[])
+},[userId])
 
 
 
