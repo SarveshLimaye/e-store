@@ -82,11 +82,7 @@ const ProductCard = ({title,desc,image ,rating,id ,price ,server_url}) => {
         <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
           Added to cart successfully !
         </Alert>
-      </Snackbar>: <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
-        <Alert onClose={handleClose} severity="error" sx={{ width: '100%' }}>
-          Item already exists in cart !
-        </Alert>
-      </Snackbar>}
+      </Snackbar>: null }
           </CardContent>
           <CardActions>
            <Typography gutterBottom variant="h6" component="div" style={{margin:'0 0 0 0.9rem',color:'#3F0071'}}>Rs {price}</Typography>

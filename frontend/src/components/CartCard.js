@@ -7,6 +7,8 @@ import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
 import ButtonBase from '@mui/material/ButtonBase';
 import Button from '@mui/material/Button';
+import Snackbar from '@mui/material/Snackbar';
+import MuiAlert from '@mui/material/Alert';
 import Rating from '@mui/material/Rating';
 
 const Img = styled('img')({
@@ -16,20 +18,35 @@ const Img = styled('img')({
     maxHeight: '100%',
   });
 
+  const Alert = React.forwardRef(function Alert(props, ref) {
+    return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+  });
+
 const CartCard = ({image,price,id,name,company,email,cart , isOrder , server_url}) => {
      const [quantity,setQuantity] = useState(1)
+     const[success,setSuccess] = useState(false)
+     const[open,setOpen]=useState(false)
      const getQuantity = (value) => {
             setQuantity(value)
      }
-     
+
+     const handleClose = (event, reason) => {
+      if (reason === 'clickaway') {
+        return;
+      }
+      setOpen(false);
+    }
 
      const deleteItem = async () => {
+      setOpen(true)
        let item = await fetch (`${server_url}/users/cart/${email}/delete/${id}`,{
         method:"Delete",
         headers:{
             "Content-Type":"application/json"
         },
        })
+       setSuccess(true)
+      
      }
         return(
           <Paper
@@ -75,6 +92,11 @@ const CartCard = ({image,price,id,name,company,email,cart , isOrder , server_url
           
             </Grid>
           </Grid>
+          {success ?  <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+        <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
+          Item deleted from cart !
+        </Alert>
+      </Snackbar> : null}
         </Paper>
       
       
