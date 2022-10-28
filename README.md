@@ -4,10 +4,16 @@ A full stack e-commerce clothing app made using MERN stack :shirt:
 
 ## Tech-Stack used :dart:
 
-- MERN
+- MongoDB
+- Express
+- React js
+- Node js
 - React-router-dom
 - Material-UI
+
+## API Used  :computer:
 - Stripe API
+- Auth0
 
 ## Setting up Locally   :construction:
 
