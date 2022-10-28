@@ -3,12 +3,12 @@ import ProductCard from "../components/ProductCard";
 import { Grid } from "@mui/material";
 import Search from "../components/Search";
 
-const Products = () => {
+const Products = ({server_url}) => {
     const[products,setProducts]=useState([])
     const [query,setQuery]=useState("")
     useEffect(()=>{
      const fetchApi = async () => {
-        const response = await fetch(query ? `http://localhost:5000/api/v1/products/search?name=${query}`: `http://localhost:5000/api/v1/products`);
+        const response = await fetch(query ? `${server_url}/v1/products/search?name=${query}`: `${server_url}/v1/products`);
         const resJson = await response.json()
         setProducts(resJson)
      }
@@ -28,7 +28,8 @@ const Products = () => {
           rating={product.rating} 
           image={product.image}
           id={product._id}
-          price={product.price}  
+          price={product.price}
+          server_url={server_url}  
           />
         </Grid>
       ))}

@@ -17,7 +17,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 
 
-const Navbar = () => {
+const Navbar = ({server_url}) => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const { loginWithRedirect , user , isAuthenticated , logout} = useAuth0()
@@ -44,7 +44,7 @@ const Navbar = () => {
     let name = user.name;
     let email = user.email;
     let image = user.picture;
-    let result = await fetch("http://localhost:5000/api/users/addUser", {
+    let result = await fetch(`${server_url}/users/addUser`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

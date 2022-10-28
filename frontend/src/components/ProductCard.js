@@ -18,7 +18,7 @@ const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
 
-const ProductCard = ({title,desc,image ,rating,id ,price}) => {
+const ProductCard = ({title,desc,image ,rating,id ,price ,server_url}) => {
   const notify = () => toast.error("Login to add to cart");
   const {user , isAuthenticated} = useAuth0()
   const[success,setSuccess] = useState(false)
@@ -28,7 +28,7 @@ const ProductCard = ({title,desc,image ,rating,id ,price}) => {
         const cartid = _id
         const email = user.email
        setOpen(true)
-        let cart = await fetch(`http://localhost:5000/api/users/updateCart`,{
+        let cart = await fetch(`${server_url}/users/updateCart`,{
              method:"Put",
              headers:{
                  "Content-Type":"application/json"

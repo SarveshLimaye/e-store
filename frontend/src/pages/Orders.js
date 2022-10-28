@@ -4,7 +4,7 @@ import OrderCard from '../components/OrderCard';
 import { Grid } from "@mui/material";
 
 
-const Orders = () => {
+const Orders = ({server_url}) => {
     const [userId,setuserId] = useState('')
     const [orders,setOrders] = useState([])
     let product = []
@@ -12,7 +12,7 @@ const Orders = () => {
     const email = user.email;
     useEffect(() => {
         const fetchApi = async () => {
-            const response = await fetch(`http://localhost:5000/api/users`);
+            const response = await fetch(`${server_url}/users`);
             const data = await response.json();
            data.map( (item) => {
               
@@ -25,7 +25,7 @@ const Orders = () => {
 
     const fetchOrders = async () => {
         if(userId !== ''){
-            const response = await fetch(`http://localhost:5000/api/orders/${userId}`);
+            const response = await fetch(`${server_url}/orders/${userId}`);
             console.log(response)
             const data = await response.json();
             setOrders(data)

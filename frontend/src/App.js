@@ -7,16 +7,17 @@ import Success from "./pages/Success";
 import Orders from "./pages/Orders";
 
 function App() {
+  const server_url = process.env.REACT_APP_SERVER_URL
   return (
     <div className="App">
-     <Navbar />
+     <Navbar server_url={server_url}/>
      <Routes>
-      <Route path="/" element={<Products />} />
-      <Route path="/Products" element={<Products />} />
-      <Route path="/Success" element={<Success />}/>
-      <Route path="/Cart" element={<Cart />} />
+      <Route path="/" element={<Products  server_url= {server_url}/>} />
+      <Route path="/Products" element={<Products server_url= {server_url} />} />
+      <Route path="/Success" element={<Success  />}/>
+      <Route path="/Cart" element={<Cart server_url= {server_url}/>} />
       <Route path="/Profile" element={<Profile />}></Route>
-      <Route path="/Orders" element={<Orders />}></Route>
+      <Route path="/Orders" element={<Orders server_url= {server_url}/>}></Route>
      </Routes>
     </div>
   );

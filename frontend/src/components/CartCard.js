@@ -16,7 +16,7 @@ const Img = styled('img')({
     maxHeight: '100%',
   });
 
-const CartCard = ({image,price,id,name,company,email,cart , isOrder}) => {
+const CartCard = ({image,price,id,name,company,email,cart , isOrder , server_url}) => {
      const [quantity,setQuantity] = useState(1)
      const getQuantity = (value) => {
             setQuantity(value)
@@ -24,7 +24,7 @@ const CartCard = ({image,price,id,name,company,email,cart , isOrder}) => {
      
 
      const deleteItem = async () => {
-       let item = await fetch (`http://localhost:5000/api/users/cart/${email}/delete/${id}`,{
+       let item = await fetch (`${server_url}/users/cart/${email}/delete/${id}`,{
         method:"Delete",
         headers:{
             "Content-Type":"application/json"

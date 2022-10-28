@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 import { Button , Grid} from "@mui/material";
 
-const Cart = () => {
+const Cart = ({server_url}) => {
    const [cart,setCart] = useState()
    const [id,setId] = useState('')
    let productId = []
@@ -14,7 +14,7 @@ const Cart = () => {
   
 
    const stripe = async () => {
-    let response = await fetch("http://localhost:5000/api/stripe/create-checkout-session", {
+    let response = await fetch(`${server_url}/stripe/create-checkout-session`, {
       method: 'POST',
       headers: {
           'Content-Type': 'application/json'
@@ -33,7 +33,7 @@ const Cart = () => {
 
    useEffect(() => {
      const fetchApi = async () => {
-         const response = await fetch(`http://localhost:5000/api/users/cart/${email}`);
+         const response = await fetch(`${server_url}/users/cart/${email}`);
           const data = await response.json()
           setId(data._id)
           setCart(data.cart)
@@ -67,6 +67,7 @@ const Cart = () => {
           email={email}
           cart={cart}
           isOrder={false}
+          server_url={server_url}
           />
         )
         )}
