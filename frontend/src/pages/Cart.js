@@ -2,14 +2,21 @@ import CartCard from "../components/CartCard";
 import { useEffect, useState } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 import { Button , Grid} from "@mui/material";
+import { css } from "@emotion/react";
+import ClipLoader from "react-spinners/ClipLoader";
 
 const Cart = ({server_url}) => {
    const [cart,setCart] = useState()
    const [id,setId] = useState('')
+   const [loadingInProgress, setLoading] = useState(true);
    let productId = []
    const[url,setUrl] = useState('')
    const {user} = useAuth0();
    const email = user.email;
+   const override = css`
+    margin: 45rem;
+    padding: 10rem;
+    `;
   
   
 
@@ -37,6 +44,7 @@ const Cart = ({server_url}) => {
           const data = await response.json()
           setId(data._id)
           setCart(data.cart)
+          setLoading(false)
           
       }  
       fetchApi()
@@ -55,7 +63,18 @@ const Cart = ({server_url}) => {
   
    
    return(
-      <div>
+    <div>
+     {loadingInProgress ? (<div style={{'textAlign':'center' ,  padding: '120px 0'}}>
+        <ClipLoader
+        color={"#372948"}
+        loading={loadingInProgress}
+        cssOverride={override}
+        size={150}
+        aria-label="Loading Spinner"
+        data-testid="loader"
+      />
+        </div>) : (
+          <div>
         {cart?.map((product) => (
           <CartCard 
           key={product._id} 
@@ -78,6 +97,9 @@ const Cart = ({server_url}) => {
     style={{ marginTop:'1.5rem' }}>
         <Button onClick={() => {console.log("i am clicked")}} variant="contained" style={{marginTop:'1rem'}} ><a style={{textDecoration:"none",color: 'white'}} href={url}>Checkout</a></Button>
        </Grid>
+      </div>
+     )}
+    
       </div>
    )
     
