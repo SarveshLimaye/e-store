@@ -2,14 +2,21 @@ import {React, useState , useEffect} from 'react';
 import { useAuth0 } from "@auth0/auth0-react";
 import OrderCard from '../components/OrderCard';
 import { Grid } from "@mui/material";
-
+import { css } from "@emotion/react";
+import ClipLoader from "react-spinners/ClipLoader";
 
 const Orders = ({server_url}) => {
     const [userId,setuserId] = useState('')
     const [orders,setOrders] = useState([])
+    const [loadingInProgress, setLoading] = useState(true);
     let product = []
     const {user} = useAuth0();
     const email = user.email;
+    const override = css`
+    margin: 45rem;
+    padding: 10rem;
+    `;
+
     useEffect(() => {
         const fetchApi = async () => {
             const response = await fetch(`${server_url}/users`);
@@ -29,6 +36,7 @@ const Orders = ({server_url}) => {
             console.log(response)
             const data = await response.json();
             setOrders(data)
+            setLoading(false)
         }
         
        
@@ -42,7 +50,17 @@ const Orders = ({server_url}) => {
 
 
     return(
-        <Grid container  spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 4, md: 12 }}>
+        <div>
+        {loadingInProgress ? ( <div style={{'textAlign':'center' ,  padding: '120px 0'}}>
+        <ClipLoader
+        color={"#372948"}
+        loading={loadingInProgress}
+        cssOverride={override}
+        size={150}
+        aria-label="Loading Spinner"
+        data-testid="loader"
+      />
+        </div>) : (<Grid container  spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 4, md: 12 }}>
         {orders.length > 0 ? orders.map(item => (
             <Grid item xs={12} sm={4} md={4} key={item._id}>
             <OrderCard 
@@ -56,7 +74,9 @@ const Orders = ({server_url}) => {
             />
             </Grid>
         )): <p> No orders yet</p>}
-        </Grid>
+        </Grid>)}
+        
+        </div>
     )
 }
 
