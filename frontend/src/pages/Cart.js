@@ -95,7 +95,7 @@ const Cart = ({server_url}) => {
     justify="center"
     direction="column"
     style={{ marginTop:'1.5rem' }}>
-        <Button onClick={() => {console.log("i am clicked")}} variant="contained" style={{marginTop:'1rem'}} ><a style={{textDecoration:"none",color: 'white'}} href={url}>Checkout</a></Button>
+        <Button onClick={() => {console.log("i am clicked")}} variant="contained" style={{marginTop:'1rem' ,  backgroundColor: '#372948',}} ><a style={{textDecoration:"none",color: 'white'}} href={url}>Checkout</a></Button>
        </Grid>
       </div>
      )}

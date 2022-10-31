@@ -24,7 +24,7 @@ const Search = ({getQuery}) => {
           onChange={(e) => { onChange(e.target.value) }}
         />
         <IconButton type="submit" sx={{ p: '10px' }} aria-label="search">
-          <SearchIcon style={{ fill: "blue" }}/>
+          <SearchIcon style={{ fill: "#372948" }}/>
         </IconButton>
         <Divider sx={{ height: 28, m: 0.5 }} orientation="vertical" />
       </Paper>
