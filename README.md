@@ -2,6 +2,42 @@
 
 A full stack e-commerce clothing app made using MERN stack :shirt:
 
+## Features ⚙️
+- Login/Register using Google account
+- Add item to cart
+- Delete item from cart
+- Payment gateway 
+- View Orders
+
+## Screenshots :camera:
+
+<table>
+<tr>
+<td>
+<img width="945" alt="image" src="https://user-images.githubusercontent.com/74766567/198983623-8787abbd-405a-4525-8159-1313320f09ae.png">
+</td>
+<td>
+<img width="945" alt="image" src="https://user-images.githubusercontent.com/74766567/198983849-48bc4413-c1e0-4780-bae6-a3115ffb04e5.png">
+</td>
+</tr>
+<tr>
+<td>
+<img width="945" alt="image" src="https://user-images.githubusercontent.com/74766567/198984085-70b05c6b-7d24-40c0-9f13-9cfa8da36878.png">
+</td>
+<td>
+<img width="945" alt="image" src="https://user-images.githubusercontent.com/74766567/198984277-00b65e2a-6014-461f-8e41-7264511a8bea.png">
+</td
+</tr>
+<tr>
+<td>
+<img width="945" alt="image" src="https://user-images.githubusercontent.com/74766567/198984635-3ce57969-b006-494b-a166-71eecd17eef1.png">
+</td>
+<td>
+<img width="945" alt="image" src="https://user-images.githubusercontent.com/74766567/198985139-d238ad81-4cca-4ddd-98f0-94c7c86f70a3.png">
+</td
+</tr>
+</table>
+
 ## Tech-Stack used :dart:
 
 - MongoDB
@@ -14,6 +50,14 @@ A full stack e-commerce clothing app made using MERN stack :shirt:
 ## API Used  :computer:
 - Stripe API
 - Auth0
+
+## Pre-requisites :white_check_mark:
+- Node js 
+- Npm
+- Stripe Account 
+- Auth0 Account
+
+Follow the following guide to generate auth0 keys - https://auth0.com/docs/quickstart/spa/react/01-login
 
 ## Setting up Locally   :construction:
 
