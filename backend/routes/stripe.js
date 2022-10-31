@@ -6,7 +6,7 @@ const {payment , createOrder} = require('../controllers/stripe')
 
 router.post('/create-checkout-session',payment)
 
-const endpointSecret = process.env.STRIPE_SIGNING_SECRET;
+const endpointSecret = "whsec_39cc0aac9fde1d7da9b626cdd3c864661664f510d4938f27dcceb55c949325f4";
 
 router.post('/webhook', express.raw({type: 'application/json'}), (request, response) => {
   const sig = request.headers['stripe-signature'];
@@ -15,7 +15,7 @@ router.post('/webhook', express.raw({type: 'application/json'}), (request, respo
   const payloadString = JSON.stringify(payload, null, 2);
   const header = stripe.webhooks.generateTestHeaderString({
     payload: payloadString,
-    secret: process.env.STRIPE_SIGNING_SECRET,
+    secret: "whsec_39cc0aac9fde1d7da9b626cdd3c864661664f510d4938f27dcceb55c949325f4" ,
   });
 
   let data
