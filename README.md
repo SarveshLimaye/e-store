@@ -2,6 +2,14 @@
 
 A full stack e-commerce clothing app made using MERN stack :shirt:
 
+## Features ⚙️
+- Login/Register using Google account
+- Add item to cart
+- Delete item from cart
+- Payment gateway 
+- View Orders
+
+
 ## Tech-Stack used :dart:
 
 - MongoDB
@@ -14,6 +22,14 @@ A full stack e-commerce clothing app made using MERN stack :shirt:
 ## API Used  :computer:
 - Stripe API
 - Auth0
+
+## Pre-requisites :white_check_mark:
+- Node js 
+- Npm
+- Stripe Account 
+- Auth0 Account
+
+Follow the following guide to generate auth0 keys - https://auth0.com/docs/quickstart/spa/react/01-login
 
 ## Setting up Locally   :construction:
 
