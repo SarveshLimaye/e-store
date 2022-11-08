@@ -21,7 +21,7 @@ const Success = () => {
  display="flex"
   mt={6}
 >
-   <Link to="/" style={{'textDecoration':'none'}}><Button variant="contained"> Back to Home</Button></Link>
+   <Link to="/" style={{'textDecoration':'none'}}><Button variant="contained" style={{backgroundColor:'#372948'}}> Back to Home</Button></Link>
 </Box>
 
 <Confetti width={window.innerWidth} height={window.innerHeight}/>
