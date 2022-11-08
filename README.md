@@ -59,6 +59,10 @@ A full stack e-commerce clothing app made using MERN stack :shirt:
 
 Follow the following guide to generate auth0 keys - https://auth0.com/docs/quickstart/spa/react/01-login
 
+## Note :memo:
+
+To proceed with payment use the test credentials provided by stripe - https://stripe.com/docs/testing
+
 ## Setting up Locally   :construction:
 
 1.  Fork the repo
