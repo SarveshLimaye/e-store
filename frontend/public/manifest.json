@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "E-store",
+  "name": "E-commerce app created using MERN stack",
   "icons": [
     {
       "src": "favicon.ico",
